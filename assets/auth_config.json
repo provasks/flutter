@@ -1,0 +1,16 @@
+{
+    "client_id" : "682ef78e-6ef1-4c91-a257-2afcae597d78",
+    "authorization_user_agent" : "DEFAULT",
+    "redirect_uri" : "msauth://https://akspoc.trianz.com/[url-encoded-package-signature-hash]",
+    "ios_redirect_uri": "msauth.682ef78e-6ef1-4c91-a257-2afcae597d78://auth",
+    "account_mode": "SINGLE",
+    "authorities" : [
+      {
+        "type": "AAD",
+        "audience": {
+         "type": "AzureADMyOrg",
+         "tenant_id": "organizations"
+        }
+      }
+    ]
+  }
