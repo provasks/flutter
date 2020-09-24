@@ -1,38 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:schmersal_poc/enums/device_types.dart';
 import 'package:schmersal_poc/widgets/navbar/nav_drawer/side_drawer.dart';
 import 'package:schmersal_poc/widgets/navbar/navbar_logo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class NavbarMobile extends StatelessWidget {
-  const NavbarMobile({Key key}) : super(key: key);
+class DrawerItem {
+  String title;
+  IconData icon;
+
+  DrawerItem(this.title, this.icon);
+}
+
+class NavbarMobile extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new NavbarMobileState();
+  }
+}
+
+class NavbarMobileState extends State<NavbarMobile> {
+  int _selectedDrawerIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   child: Center(
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: [
-    //         Text("Hello"),
-    //         NavbarLogo(),
-    //       ],
-    //     ),
-    //   ),
-    //   // drawer: SideDrawer(),
-    //   // body: Container(
-    //   //   height: 80,
-    //   //   padding: EdgeInsets.all(10.0),
-    //   //   child: Center(
-    //   //     child: Column(
-    //   //       mainAxisAlignment: MainAxisAlignment.center,
-    //   //       children: [
-    //   //         Text("Hello"),
-    //   //         NavbarLogo(),
-    //   //       ],
-    //   //     ),
-    //   //   ),
-    //   // ),
-    // );
     return Container(
-      height: 80,
+      padding: const EdgeInsets.only(top: 0.0, right: 10.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,7 +33,6 @@ class NavbarMobile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                // drawer: SideDrawer(),
                 IconButton(
                   icon: Icon(Icons.menu),
                   onPressed: () {
@@ -52,35 +43,51 @@ class NavbarMobile extends StatelessWidget {
               ],
             ),
           ),
-          // Container(
-          //   padding: const EdgeInsets.only(left:20.0, right: 20.0),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.end,
-          //     children: <Widget>[
-          //       Container(
-          //         width: 25.0,
-          //         margin: EdgeInsets.only(right: 8.0),
-          //         decoration: BoxDecoration(
-          //           border: Border.all(color: Colors.black, width: 1),
-          //           color: Colors.white,
-          //           shape: BoxShape.circle,
-          //         ),
-          //         child: IconButton(
-          //           iconSize: 4,
-          //           icon: Image.asset('assets/images/Language.png'),
-          //           onPressed: () {},
-          //         ),
-          //       ),
-          //       IconButton(
-          //         padding: EdgeInsets.zero,
-          //         constraints: BoxConstraints(),
-          //         // iconSize: 40,
-          //         icon: Image.asset('assets/images/User Profile.png'),
-          //         onPressed: () {},
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Container(
+            padding: const EdgeInsets.only(left: 10.0, right: 2.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  width: 25.0,
+                  height: 25.0,
+                  margin: EdgeInsets.only(right: 4.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 1),
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                  ),
+                  child: IconButton(
+                    iconSize: 4,
+                    icon: Image.asset('${config.imagePath}/search.png'),
+                    onPressed: () {},
+                  ),
+                ),
+                Container(
+                  width: 25.0,
+                  height: 25.0,
+                  margin: EdgeInsets.only(right: 4.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 1),
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: IconButton(
+                    iconSize: 4,
+                    icon: Image.asset('${config.imagePath}/sync.png'),
+                    onPressed: () async {
+                      SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
+                      await preferences.clear();
+                      Navigator.pushNamed(context, '/');
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

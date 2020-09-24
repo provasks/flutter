@@ -2,21 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:schmersal_poc/utils/ui_utils.dart';
 
 class Styles {
-  static TextStyle defaultStyle = TextStyle(color: Colors.grey[900]);
+  static TextStyle defaultStyle = TextStyle(
+    fontFamily: "Arial",
+    fontSize: 12,
+    color: Colors.black,
+  );
+  static TextStyle label = defaultStyle.copyWith(
+    color: hexToColor("#515151"),
+  );
+  static TextStyle value = defaultStyle.copyWith(
+    color: hexToColor("#00377B"),
+  );
+  static TextStyle username = defaultStyle.copyWith(
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle clientName = defaultStyle.copyWith(
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
 
   static TextStyle h1 = defaultStyle.copyWith(
+    fontFamily: "Arial",
     fontWeight: FontWeight.w700,
     fontSize: 18.0,
     height: 22 / 18,
   );
 
   static TextStyle p = defaultStyle.copyWith(
-    fontSize: 14.0,
+    fontFamily: "Arial",
+    fontSize: 12.0,
   );
 
   static TextStyle error = defaultStyle.copyWith(
+    fontFamily: "Arial",
     fontWeight: FontWeight.w500,
-    fontSize: 14.0,
+    fontSize: 12.0,
     color: Colors.red,
   );
 

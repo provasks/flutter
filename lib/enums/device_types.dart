@@ -7,9 +7,9 @@ extension Extension on DeviceScreenType {
   double get loginBoxSize {
     switch (this) {
       case DeviceScreenType.Desktop:
-        return 525;
+        return 430;
       case DeviceScreenType.Tablet:
-        return 475;
+        return 400;
       default:
         return 305;
     }
@@ -19,7 +19,7 @@ extension Extension on DeviceScreenType {
     String url = '';
     switch (this) {
       case DeviceScreenType.Mobile:
-        url = '${config.imagePath}/Login_mobile_bg.png';
+        url = 'assets/images/Login_mobile_bg.png';
         break;
       case DeviceScreenType.Tablet:
         url = '${config.imagePath}/Login_tab_bg.png';
@@ -31,5 +31,19 @@ extension Extension on DeviceScreenType {
     return url;
   }
 
-  
+  double get imageWidth {
+    double width = 0.0;
+    switch (this) {
+      case DeviceScreenType.Mobile:
+        width = 150.0;
+        break;
+      case DeviceScreenType.Tablet:
+        width = 180.0;
+        break;
+      default:
+        width = 250;
+        break;
+    }
+    return width;
+  }
 }

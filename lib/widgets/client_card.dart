@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:schmersal_poc/enums/device_types.dart';
 import 'package:schmersal_poc/models/client.dart';
+import 'package:schmersal_poc/styles/styles.dart';
 import 'package:schmersal_poc/ui/base_widget.dart';
 import 'package:schmersal_poc/utils/ui_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClientCard extends StatelessWidget {
   ClientCard({Key key, this.client}) : super(key: key);
@@ -15,8 +17,11 @@ class ClientCard extends StatelessWidget {
           widthFactor: getWidthFactor(sizingInformation.info()),
           child: Card(
             shape: RoundedRectangleBorder(
-              side: BorderSide(color: hexToColor('#00377B'), width: 1.0),
-              borderRadius: BorderRadius.circular(10.0),
+              side: BorderSide(
+                color: hexToColor('#00377B'),
+                width: 1.0,
+              ),
+              borderRadius: BorderRadius.circular(5.0),
             ),
             // color: Colors.pink,
             // elevation: 5,
@@ -26,51 +31,136 @@ class ClientCard extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 3,
-                  
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image(
-                            image: AssetImage("images/logos/${client.logo}"),
-                          ),
-                          Text(
-                            this.client.name,
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                          Text(
-                            "Client code: ${this.client.clientId}",
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                          Text(
-                            "Address: ${this.client.address}",
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
                   child: Column(
                     //column 2 for image
                     // crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Image(
-                        image: AssetImage("assets/images/${client.image}.png"),
-                        // width: 80,
+                        image: AssetImage("${config.imagePath}/${client.image}"),
+
+                        // width: 100,
+                        // height: 200,
                         fit: BoxFit.fill,
                       ),
                     ],
+                  ),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 2, 0, 10),
+                            child: Image(
+                              image: AssetImage(
+                                  "${config.imagePath}/logos/${client.logo}"),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 2, 4, 5),
+                            child: Text(
+                              this.client.customerName,
+                              style: Styles.clientName,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 72,
+                                  child: Text(
+                                    "Client Code:",
+                                    style: Styles.label,
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: Text(
+                                    this.client.customerCode,
+                                    style: Styles.value,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 72,
+                                  child: Text(
+                                    "Address:",
+                                    style: Styles.label,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 90,
+                                  child: Text(
+                                    this.client.customerAddress,
+                                    style: Styles.value,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 72,
+                                  child: Text(
+                                    "Contact:",
+                                    style: Styles.label,
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: Text(
+                                    this.client.contact,
+                                    style: Styles.value,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 72,
+                                  child: Text(
+                                    "Location:",
+                                    style: Styles.label,
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: GestureDetector(
+                                    onTap: () => openLocation(this
+                                        .client
+                                        .location), // handle your image tap here
+                                    child: Image.asset(
+                                      '${config.imagePath}/icons/Map.png',
+                                      // fit: BoxFit
+                                      //     .cover, // this is the solution for border
+                                      width: 32.0,
+                                      height: 26.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -88,7 +178,16 @@ class ClientCard extends StatelessWidget {
       case DeviceScreenType.Tablet:
         return .5;
       default:
-        return 1;
+        return 1.0;
+    }
+  }
+
+  openLocation(url) async {
+    // url = this.client.location
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 }

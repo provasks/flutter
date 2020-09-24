@@ -15,15 +15,15 @@ class StyledFlatButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       color: hexToColor('#00377B'),
-      splashColor: Colors.blue[200],
+      // splashColor: Colors.blue[200],
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 18.0),
+        padding: EdgeInsets.symmetric(vertical: 5.0),
         child: Text(
           this.text,
           style: Styles.p.copyWith(
             color: Colors.white,
             height: 1,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
