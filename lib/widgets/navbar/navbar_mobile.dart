@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:schmersal_poc/enums/device_types.dart';
-import 'package:schmersal_poc/widgets/navbar/nav_drawer/side_drawer.dart';
 import 'package:schmersal_poc/widgets/navbar/navbar_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +18,6 @@ class NavbarMobile extends StatefulWidget {
 }
 
 class NavbarMobileState extends State<NavbarMobile> {
-  int _selectedDrawerIndex = 0;
 
   @override
   Widget build(BuildContext context) {

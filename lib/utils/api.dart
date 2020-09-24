@@ -7,9 +7,9 @@ import 'package:schmersal_poc/models/login.dart';
 import 'package:schmersal_poc/utils/parser.dart';
 
 Future<List<Client>> fetchClients() async {
-  final response =
-      await http.get('http://13.71.32.132:9000/api/CustomerListing');
-  // final response = await http.get('http://40.81.229.103/api/CustomerListing');
+  // final response =
+      // await http.get('http://13.71.32.132:9000/api/CustomerListing');
+  final response = await http.get('http://40.81.229.103/api/CustomerListing');
   if (response.statusCode == 200) {
     return parseClients(response.body);
   } else {

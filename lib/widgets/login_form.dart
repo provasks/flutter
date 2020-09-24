@@ -1,16 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:schmersal_poc/models/login.dart';
 import 'package:schmersal_poc/enums/device_types.dart';
 import 'package:schmersal_poc/styles/styles.dart';
 import 'package:schmersal_poc/ui/views/home_view.dart';
-import 'package:schmersal_poc/utils/api.dart';
 import 'package:schmersal_poc/utils/ui_utils.dart';
 import 'package:schmersal_poc/utils/validate.dart';
 import 'package:schmersal_poc/widgets/styled_flat_button.dart';
-import 'package:msal_mobile/msal_mobile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:schmersal_poc/enums/device_types.dart';
 import 'package:schmersal_poc/widgets/login_form.dart';
-import 'package:schmersal_poc/utils/ui_utils.dart';
 import '../base_widget.dart';
 
 class LoginView extends StatelessWidget {

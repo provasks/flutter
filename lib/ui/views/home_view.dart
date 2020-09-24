@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:schmersal_poc/enums/device_types.dart';
 import 'package:schmersal_poc/widgets/navbar/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,19 +28,19 @@ class HomeView extends StatefulWidget {
 class HomePageState extends State<HomeView> {
   int _selectedDrawerIndex = 0;
   SharedPreferences prefs;
-  _getDrawerItemWidget(int pos) {
-     switch (pos) {
-      case 0:
-       // return new FirstFragment();
-      case 1:
-       // return new SecondFragment();
-      case 2:
-       // return new ThirdFragment();
+  // _getDrawerItemWidget(int pos) {
+  //    switch (pos) {
+  //     case 0:
+  //      // return new FirstFragment();
+  //     case 1:
+  //      // return new SecondFragment();
+  //     case 2:
+  //      // return new ThirdFragment();
 
-      default:
-        return new Text("Error");
-    }
-  }
+  //     default:
+  //       return new Text("Error");
+  //   }
+  // }
 
   _onSelectItem(int index) {
     setState(() => _selectedDrawerIndex = index);
